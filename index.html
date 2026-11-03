@@ -79,7 +79,6 @@
   body.touch .ebtn.emo-x { display:none; }
   body.touch.emo-open .ebtn.emo-x { display:block; }
   body.touch.emo-open #emoToggle { background:#fff; box-shadow:0 0 0 2px var(--wine); }
-  body.touch #jumpBtn { width:62px; height:62px; font-size:26px; border-radius:50%; }
   body.touch #joy { left:16px; bottom:22px; width:116px; height:116px; opacity:.75; }
   body.touch #prompt { bottom:156px; }
   body.touch #holdTag { bottom:206px; }
@@ -1179,7 +1178,7 @@ function jump(av) { if (av.grounded && !av.seat) { av.vy = 9; av.grounded = fals
 function emote(av, kind) {
   if (av.seat && (kind === 'dance' || kind === 'cheer')) kind = 'wave';
   av.emote = kind; av.emoteT = { dance:3.2, high5:1.3, heart:1.9, toast:1.5, feed:1.3, bow:1.5 }[kind] || 1.8; av.emoteLen = av.emoteT;
-  if (kind === 'cheer') jump(av);
+  if (kind === 'cheer') { av.emoteT = av.emoteLen = 1.05; if (av.grounded && !av.seat) { av.vy = 11.5; av.grounded = false; } }
   if (av === player) netSend({ emo:{ e:kind, k:++netK.emo } });
 }
 function sit(av, s) {
@@ -1205,7 +1204,7 @@ function animateAvatar(av, dt, t) {
   av.legs[0].rotation.x = sw; av.legs[1].rotation.x = -sw;
   av.arms[0].rotation.x = -sw * .8; av.arms[1].rotation.x = sw * .8;
   av.arms[0].rotation.z = -.08; av.arms[1].rotation.z = .08;
-  av.pivot.rotation.y = 0; av.pivot.rotation.x = 0; av.pivot.rotation.z = 0;
+  av.pivot.rotation.y = 0; av.pivot.rotation.x = 0; av.pivot.rotation.z = 0; av.pivot.position.z = 0;
   av.pivot.position.y = Math.abs(Math.sin(av.phase)) * .08 * av.moveAmt + Math.sin(t * 2 + av.phase * .01) * .012;
   if (av.seat) {
     av.legs[0].rotation.x = av.legs[1].rotation.x = -1.45;
@@ -1225,7 +1224,13 @@ function animateAvatar(av, dt, t) {
     else if (av.emote === 'toast' && freeArms) { av.arms[1].rotation.x = -1.9 - Math.sin(t * 10) * .15; av.arms[1].rotation.z = -.15; }
     else if (av.emote === 'feed' && freeArms) { av.arms[1].rotation.x = -1.55; av.arms[1].rotation.z = -.2; }
     else if (av.emote === 'bow') { av.pivot.rotation.x = Math.sin(Math.PI * Math.min(1, 1 - av.emoteT / (av.emoteLen || 1.5))) * .55; }
-    else if (av.emote === 'cheer' && freeArms) { av.arms[0].rotation.x = av.arms[1].rotation.x = 0; av.arms[0].rotation.z = -2.8; av.arms[1].rotation.z = 2.8; }
+    else if (av.emote === 'cheer') {
+      // back tuck: one full turn backwards while airborne, pivoting around the waist
+      const k = Math.min(1, (av.emoteLen - av.emoteT) / .92), e = k * k * (3 - 2 * k), th = -Math.PI * 2 * e, c = 1.1;
+      av.pivot.rotation.x = th; av.pivot.position.y += c - c * Math.cos(th); av.pivot.position.z = -c * Math.sin(th);
+      if (freeArms) { const up = k < .25 || k > .85; av.arms[0].rotation.x = av.arms[1].rotation.x = up ? 0 : -1.3; av.arms[0].rotation.z = up ? -2.8 : -.3; av.arms[1].rotation.z = up ? 2.8 : .3; }
+      av.legs[0].rotation.x = av.legs[1].rotation.x = k > .2 && k < .8 ? -1.2 : 0;
+    }
     if (av.emoteT <= 0) av.emote = null;
   }
   if (av.bubbleT > 0) { av.bubbleT -= dt; if (av.bubbleT <= 0) av.bubble.style.display = 'none'; }
