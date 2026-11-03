@@ -11,3 +11,8 @@ Supabase 대시보드 → SQL Editor 에서 `setup.sql` 을 한 번 실행하세
 
 ## 자주 바꾸는 곳
 `index.html` 상단의 `BRAND` 설정에서 이름·색·메뉴·선물세트·대사를, `SUPABASE` 설정에서 프로젝트 주소와 키를 바꿀 수 있어요.
+
+## 운영 팁
+- **방명록 글 숨기기**: Supabase → Table Editor → `guestbook` → 해당 글의 `is_hidden` 을 `true` 로 바꾸면 바로 사라져요.
+- **굽기 랭킹 초기화**: `grill_scores` 테이블에서 행을 지우면 돼요 (랭킹은 최근 7일 기준).
+- **선물세트 바꾸기**: `index.html` 의 `BRAND.giftSets` — 상품별 `url` 에 스마트스토어 상품 링크를 넣으면 구매 버튼이 그 상품으로 바로 연결돼요.

@@ -50,3 +50,37 @@ create policy "anyone can add a score"
   with check (score between 0 and 300 and char_length(name) between 1 and 12);
 
 create index if not exists grill_scores_week_idx on public.grill_scores (created_at desc, score desc);
+
+-- ------------------------------------------------------------
+-- 응원 방명록 (v5에서 추가) — 이 아래만 다시 실행해도 됩니다.
+-- 누구나 글을 "추가"하고 "읽을" 수 있어요. 수정·삭제는 불가.
+-- 부적절한 글은 Table Editor > guestbook 에서 is_hidden 을 true 로 바꾸면 바로 숨겨져요.
+create table if not exists public.guestbook (
+  id bigint generated always as identity primary key,
+  name text not null check (char_length(name) between 1 and 12),
+  message text not null check (char_length(message) between 1 and 60),
+  color text not null default '#fff1a8' check (char_length(color) <= 9),
+  is_hidden boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+alter table public.guestbook enable row level security;
+
+grant select, insert on public.guestbook to anon;
+
+drop policy if exists "read visible notes" on public.guestbook;
+create policy "read visible notes"
+  on public.guestbook for select
+  to anon
+  using (is_hidden = false);
+
+drop policy if exists "add a note" on public.guestbook;
+create policy "add a note"
+  on public.guestbook for insert
+  to anon
+  with check (is_hidden = false and char_length(message) between 1 and 60 and char_length(name) between 1 and 12);
+
+-- 새 글이 게시판에 실시간으로 붙도록 Realtime에 등록
+do $$ begin
+  alter publication supabase_realtime add table public.guestbook;
+exception when duplicate_object then null; end $$;

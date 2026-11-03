@@ -55,12 +55,41 @@
   #joy { left:22px; bottom:90px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.35); border:2px solid rgba(255,255,255,.75); display:none; touch-action:none; }
   #knob { position:absolute; left:50%; top:50%; width:50px; height:50px; margin:-25px 0 0 -25px; border-radius:50%; background:rgba(255,255,255,.92); box-shadow:0 3px 10px rgba(0,0,0,.2); }
   #jumpBtn { display:none; }
+  #menuBtn, .ebtn.mob { display:none; }
+  #moreTools { display:contents; }
+  /* ---- phone layout: fewer, larger controls; panels fold away ---- */
+  body.touch #title { top:10px; left:10px; padding:7px 11px; border-left-width:4px; }
+  body.touch #title h1 { font-size:16px; }
+  body.touch #title .online { font-size:11px; }
+  body.touch #tools { top:10px; right:10px; gap:6px; max-width:none; }
+  body.touch .tbtn { height:38px; padding:0 11px; font-size:12px; }
+  body.touch #menuBtn { display:inline-flex; font-size:18px; }
+  body.touch #moreTools { display:none; position:fixed; top:56px; right:10px; flex-direction:column; gap:6px; padding:8px; border-radius:16px; background:var(--glass); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); box-shadow:0 8px 26px rgba(60,20,30,.18); }
+  body.touch.menu-open #moreTools { display:flex; }
+  body.touch #moreTools .tbtn { box-shadow:none; justify-content:flex-start; height:42px; font-size:14px; }
+  body.touch #log { top:74px; bottom:auto; left:10px; width:min(68vw, 300px); gap:3px; }
+  body.touch #log div { font-size:11.5px; padding:3px 8px; }
+  body.touch #log div:nth-last-child(n+4) { display:none; }
+  body.touch #chatbar { display:none; left:8px; right:8px; bottom:8px; transform:none; width:auto; z-index:12; }
+  body.touch.chat-open #chatbar { display:flex; }
+  body.touch.chat-open #emotes, body.touch.chat-open #joy { display:none; }
+  body.touch #emotes { right:12px; bottom:22px; gap:9px; }
+  body.touch .ebtn { width:48px; height:48px; font-size:21px; }
+  body.touch .ebtn.mob { display:block; }
+  body.touch .ebtn.emo-x { display:none; }
+  body.touch.emo-open .ebtn.emo-x { display:block; }
+  body.touch.emo-open #emoToggle { background:#fff; box-shadow:0 0 0 2px var(--wine); }
+  body.touch #jumpBtn { width:62px; height:62px; font-size:26px; border-radius:50%; }
+  body.touch #joy { left:16px; bottom:22px; width:116px; height:116px; opacity:.75; }
+  body.touch #prompt { bottom:156px; }
+  body.touch #holdTag { bottom:206px; }
+  body.touch #grillPanel { bottom:150px; }
+  body.touch #actMenu { right:70px; bottom:22px; }
+  body.touch #toast { top:112px; font-size:13px; white-space:normal; text-align:center; max-width:86vw; }
+  body.touch #shortsBar { top:10px; bottom:auto; }
+  body.touch #recInfo { top:74px; }
   body.touch #joy, body.touch #jumpBtn { display:block; }
   body.touch #help { display:none; }
-  body.touch #tools { max-width:calc(100vw - 28px); top:84px; }
-  body.touch #log { bottom:222px; }
-  body.touch #prompt { bottom:230px; }
-  body.touch #holdTag { bottom:282px; }
   body.customizing .hud:not(#title):not(#tools) { display:none !important; }
   body.customizing #help { display:none; }
 
@@ -91,6 +120,16 @@
   .mrow .nm { font-weight:700; font-size:15px; }
   .mrow .ds { font-size:12px; color:#7b6a6f; }
   .mrow .pr { margin-left:auto; font-weight:700; color:var(--wine); white-space:nowrap; font-size:14px; }
+  .orig { font-size:11px; color:#9a898e; text-decoration:line-through; font-weight:400; text-align:right; }
+  .disc { display:inline-block; font-size:11px; font-weight:900; color:#fff; background:var(--wine); border-radius:999px; padding:2px 7px; margin-right:6px; vertical-align:1px; }
+  .gdetail .orig { text-align:center; font-size:13px; }
+  .gdetail .disc { font-size:14px; padding:3px 9px; }
+  #gbMsg { width:100%; border:2px solid #eadfd3; border-radius:12px; padding:10px 12px; font:inherit; font-size:15px; resize:none; outline:none; background:#fff; }
+  #gbMsg:focus { border-color:var(--wine); }
+  .gbrow { display:flex; align-items:center; justify-content:space-between; margin:8px 0 2px; font-size:12px; color:#9a898e; }
+  .gbnote { display:inline-block; width:calc(50% - 6px); margin:6px 6px 0 0; padding:10px 10px 8px; border-radius:4px 4px 12px 4px; font-size:13px; line-height:1.4; color:#3a2a20; box-shadow:0 3px 8px rgba(0,0,0,.12); vertical-align:top; word-break:keep-all; overflow-wrap:anywhere; }
+  .gbnote b { display:block; font-size:11px; color:#7b6a6f; margin-top:4px; }
+  #gbList { max-height:34vh; overflow:auto; margin-top:10px; }
   .grow { cursor:pointer; border-radius:12px; padding:10px 8px; margin:0 -8px; border-bottom:0; }
   .grow:hover { background:#fff; }
   .gbox { --c:#7b1e34; --r:#c9a45c; flex:none; width:58px; height:46px; border-radius:7px; background:var(--c); position:relative; box-shadow:inset 0 -6px 0 rgba(0,0,0,.18), 0 3px 8px rgba(0,0,0,.15); }
@@ -124,7 +163,6 @@
   .tags { margin-top:10px; font-size:13px; color:#5b4a4f; background:#fff; border-radius:10px; padding:8px 10px; user-select:text; -webkit-user-select:text; }
   /* grill minigame */
   #grillPanel { position:fixed; z-index:9; left:50%; bottom:140px; transform:translateX(-50%); width:min(440px, calc(100vw - 24px)); padding:14px 16px 12px; display:none; }
-  body.touch #grillPanel { bottom:236px; }
   #grillPanel .gp-top { display:flex; justify-content:space-between; align-items:center; font-size:14px; margin-bottom:8px; color:var(--wine); }
   #grillPanel .gp-top b { font-family:'Black Han Sans',sans-serif; font-weight:400; font-size:19px; }
   .gp-bar { position:relative; height:22px; border-radius:11px; overflow:hidden; background:linear-gradient(90deg,#c62828 0 35%,#ef9a9a 35% 55%,#ffd54f 55% 72%,#a1887f 72% 85%,#3e2723 85% 100%); box-shadow:inset 0 0 0 2px rgba(0,0,0,.08); }
@@ -175,10 +213,13 @@
     <div><b>Enter</b>채팅 · <b style="min-width:0">1 2 3</b> 이모트</div>
   </div>
   <button class="tbtn" id="giftBtn">🎁 선물세트</button>
-  <a class="tbtn store" id="storeBtn" target="_blank" rel="noopener">N 스마트스토어</a>
-  <button class="tbtn" id="shortsBtn">🎬 숏츠</button>
-  <button class="tbtn" id="customBtn">👕 꾸미기</button>
-  <button class="tbtn" id="nightBtn">🌙</button>
+  <div id="moreTools">
+    <a class="tbtn store" id="storeBtn" target="_blank" rel="noopener">N 스마트스토어</a>
+    <button class="tbtn" id="shortsBtn">🎬 숏츠</button>
+    <button class="tbtn" id="customBtn">👕 꾸미기</button>
+    <button class="tbtn" id="nightBtn">🌙 밤</button>
+  </div>
+  <button class="tbtn" id="menuBtn" aria-label="메뉴">☰</button>
 </div>
 <div id="log" class="hud"></div>
 <div id="holdTag" class="hud panel"></div>
@@ -188,9 +229,11 @@
   <button type="submit">전송</button>
 </form>
 <div id="emotes" class="hud">
-  <button class="ebtn" data-e="wave" title="인사 (1)">👋</button>
-  <button class="ebtn" data-e="dance" title="춤 (2)">💃</button>
-  <button class="ebtn" data-e="cheer" title="환호 (3)">🎉</button>
+  <button class="ebtn mob" id="chatToggle" title="채팅">💬</button>
+  <button class="ebtn emo-x" data-e="wave" title="인사 (1)">👋</button>
+  <button class="ebtn emo-x" data-e="dance" title="춤 (2)">💃</button>
+  <button class="ebtn emo-x" data-e="cheer" title="환호 (3)">🎉</button>
+  <button class="ebtn mob" id="emoToggle" title="이모트">😊</button>
   <button class="ebtn" id="actBtn" title="상호작용 (Q)">🤝</button>
   <button class="ebtn" id="jumpBtn" title="점프">⤴️</button>
 </div>
@@ -223,6 +266,17 @@
   <button class="btn ghost" id="clipRetry">🎬 다시 찍기</button>
   <div class="tags" id="clipTags"></div>
   <button class="btn ghost" id="clipCopy" style="margin-top:6px">해시태그 복사</button>
+</div></div>
+<div id="gb" class="modal"><div class="sheet">
+  <button class="x" data-close aria-label="닫기">×</button>
+  <h3>📝 응원 방명록</h3>
+  <div class="sub">김씨네한우에 응원 한마디를 남겨주세요. 남긴 글은 마을 게시판에 붙어요!</div>
+  <textarea id="gbMsg" maxlength="60" rows="2" placeholder="예) 사장님 번창하세요! 명절 선물 여기서 할게요 🎁"></textarea>
+  <div class="gbrow"><div class="chips" id="gbColors"></div><span id="gbCount">0/60</span></div>
+  <button class="btn primary" id="gbPost">포스트잇 붙이기</button>
+  <div id="gbList"></div>
+  <a class="btn ghost" id="gbReview" target="_blank" rel="noopener">⭐ 실제 구매 후기는 스마트스토어에서 보기 ↗</a>
+  <small class="note">방명록은 방문자 응원 메시지예요 (구매 후기 아님). 부적절한 글은 숨김 처리될 수 있어요.</small>
 </div></div>
 <div id="lb" class="modal"><div class="sheet">
   <button class="x" data-close aria-label="닫기">×</button>
@@ -259,6 +313,7 @@
 <script type="module">
 // shared state declared first so nothing can touch it before initialization
 var LB = { rows:[], ok:false };
+var GB = { rows:[], ok:false }, gbCanvas = null, gbTex = null, gbNotes = [];
 var shorts = false, shortsCam = 'cine', lbTex = null, lbCanvas = null, grillGame = null, recState = null, actOpen = false;
 var whoDirty = true, player = null, customizing = true, entered = false, camYaw = 0, camPitch = .36, camDist = 12;
 let THREE;
@@ -287,12 +342,15 @@ const BRAND = {
     { cut:'육회',   grade:'1+',  desc:'당일 손질한 우둔살',             price:'300g 25,000원' },
   ],
   // 선물세트 — 실제 상품명/구성/가격/링크로 바꿔주세요 (url 비우면 스토어 메인으로 연결)
+  // 선물세트 — 스마트스토어 상품 기준 (url에 상품 링크를 넣으면 버튼이 그 상품으로 바로 연결돼요)
   giftSets: [
-    { name:'프리미엄 VIP 세트',   short:'VIP',     grade:'1++', items:'꽃등심 · 안심 · 채끝 · 살치살', weight:'1.6kg', price:'329,000원', box:0x1d1a1c, ribbon:0xc9a45c, desc:'가장 귀한 분께 드리는 최상급 구성', url:'' },
-    { name:'시그니처 1호',        short:'1호',     grade:'1++', items:'꽃등심',                     weight:'1.2kg', price:'219,000원', box:0x7b1e34, ribbon:0xc9a45c, desc:'꽃등심만 가득 담은 대표 세트',     url:'' },
-    { name:'시그니처 2호 구이모듬', short:'2호',     grade:'1++', items:'등심 · 채끝 · 갈비살 · 부채살', weight:'1.2kg', price:'189,000원', box:0x7b1e34, ribbon:0xf8f1e7, desc:'다양한 부위를 골고루 즐기는 구이 세트', url:'' },
-    { name:'패밀리 세트',          short:'패밀리',   grade:'1+',  items:'등심 · 차돌박이 · 불고기 · 국거리', weight:'1.6kg', price:'159,000원', box:0xf3e7d8, ribbon:0x7b1e34, desc:'온 가족이 구이부터 국까지',       url:'' },
-    { name:'실속 정육세트',        short:'실속',     grade:'1+',  items:'불고기 · 국거리 · 장조림',      weight:'1.8kg', price:'119,000원', box:0x23324a, ribbon:0xc9a45c, desc:'명절 요리에 꼭 필요한 실속 구성', url:'' },
+    { name:'담(談)', short:'談', title:'정성과 이야기를 담다',  weight:'1.2kg', items:'꽃등심300g + 채끝300g + 갈비살300g + 차돌박이300g',             original:'286,000원', discount:'47.6%', price:'149,900원', box:0x7b1e34, ribbon:0xc9a45c, url:'' },
+    { name:'온(溫)', short:'溫', title:'따뜻한 마음의 선물',    weight:'1.2kg', items:'꽃등심300g + 갈비살300g + 업진살300g + 국거리300g',             original:'260,000원', discount:'45.4%', price:'141,900원', box:0xa8432f, ribbon:0xf8f1e7, url:'' },
+    { name:'연(宴)', short:'宴', title:'귀한 잔치상으로 초대',  weight:'1.2kg', items:'꽃등심300g + 부채살300g + 채끝300g + 불고기300g',               original:'232,000원', discount:'38.5%', price:'142,900원', box:0xf3e7d8, ribbon:0x7b1e34, url:'' },
+    { name:'결(結)', short:'結', title:'귀한 인연을 잇는 선물',  weight:'1.2kg', items:'갈비살300g + 부채살300g + 채끝살300g + 차돌박이300g',           original:'280,000원', discount:'45.4%', price:'149,900원', box:0x2f4a3a, ribbon:0xc9a45c, url:'' },
+    { name:'품(品)', short:'品', title:'프리미엄 상위 라인',    weight:'1.2kg', items:'꽃등심300g + 안심300g + 채끝살300g + 업진살300g',               original:'305,000원', discount:'41.6%', price:'177,900원', box:0x23324a, ribbon:0xc9a45c, url:'' },
+    { name:'명(名)', short:'名', title:'명품 한우 라인',        weight:'1.5kg', items:'꽃등심300g + 채끝300g + 갈비살300g + 살치살300g + 부채살300g', original:'355,000원', discount:'35.5%', price:'229,000원', box:0x4a1020, ribbon:0xe0c27a, url:'' },
+    { name:'격(格)', short:'格', title:'최상위 프레스티지',     weight:'1.5kg', items:'꽃등심300g + 채끝300g + 안심300g + 특수부위300g + 살치살300g', original:'380,000원', discount:'34.4%', price:'249,000원', box:0x1d1a1c, ribbon:0xc9a45c, url:'', hero:true },
   ],
   ownerName: '김사장님',
   ownerLines: [
@@ -305,7 +363,8 @@ const BRAND = {
   giftStaffName: '선물관 매니저',
   giftStaffLines: [
     '선물세트관에 오신 걸 환영해요! 🎁',
-    '명절 선물로는 VIP 세트가 제일 인기예요',
+    '명절 선물로는 격(格) 세트가 제일 인기예요 👑',
+    '실속 있게는 담(談), 온(溫)도 많이 찾으세요',
     '진열대 앞에서 E를 누르면 구매하실 수 있어요',
     '산 선물은 다른 손님께 선물할 수도 있어요 💝',
     '스마트스토어에서도 똑같이 주문하실 수 있어요!',
@@ -327,6 +386,7 @@ $('#storeBtn').href = BRAND.storeUrl;
 const hex = c => '#' + new THREE.Color(c).getHexString();
 const WINE_CSS = hex(BRAND.wine), GOLD_CSS = hex(BRAND.gold), CREAM_CSS = hex(BRAND.cream);
 const GIFTS = BRAND.giftSets;
+const HERO = Math.max(0, GIFTS.findIndex(g => g.hero));
 
 await Promise.race([
   Promise.all([document.fonts.load('80px "Black Han Sans"'), document.fonts.load('700 40px "Noto Sans KR"')]).catch(() => {}),
@@ -343,12 +403,12 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const scene = new THREE.Scene();
-const DAY_SKY = new THREE.Color(0xb9dcf2), NIGHT_SKY = new THREE.Color(0x1a1024);
+const DAY_SKY = new THREE.Color(0xcfe2ec), NIGHT_SKY = new THREE.Color(0x1b1426);
 scene.background = DAY_SKY.clone();
 scene.fog = new THREE.Fog(DAY_SKY.clone(), 75, 175);
 const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 600);
 
-const hemi = new THREE.HemisphereLight(0xffffff, 0x7a8f5a, 1.1);
+const hemi = new THREE.HemisphereLight(0xfff8ee, 0x8a7a5a, 1.1);
 scene.add(hemi);
 const sun = new THREE.DirectionalLight(0xfff0dc, 2.3);
 sun.castShadow = true;
@@ -470,7 +530,7 @@ const giftTexes = GIFTS.map(s => tex(256, 256, (g, w, h) => {
   g.strokeStyle = hex(s.ribbon); g.lineWidth = 6; g.strokeRect(16, 16, w - 32, h - 32);
   g.textAlign = 'center'; g.textBaseline = 'middle';
   g.fillStyle = lightBox ? WINE_CSS : GOLD_CSS; g.font = `46px ${HAN}`; g.fillText(BRAND.name, w / 2, h / 2 - 22);
-  g.fillStyle = lightBox ? '#5b4a4f' : '#fff'; g.font = `700 30px ${NOTO}`; g.fillText(s.short, w / 2, h / 2 + 30);
+  g.fillStyle = lightBox ? '#5b4a4f' : '#fff'; g.font = `52px ${HAN}`; g.fillText(s.short, w / 2, h / 2 + 34);
 }));
 
 const wineM = mat(BRAND.wine), creamM = mat(BRAND.cream), goldM = smooth(BRAND.gold, { metalness:.5, roughness:.35 });
@@ -547,62 +607,200 @@ const flowerGeo = new THREE.SphereGeometry(.2, 6, 4), flowerMs = [0xff80ab, 0xff
 // =====================================================================
 const PX0 = 30, PX1 = 58, PZ0 = -48, PZ1 = -18;
 const cows = [];
+
+// =====================================================================
+//  HANOK KIT — curved giwa roofs, lattice doors, signboards, lanterns
+// =====================================================================
+const HK = {
+  stone:mat(0xbdb6a8), stoneDark:mat(0x8f887c), wall:mat(0xf4eee2), wood:mat(0x6b4630), woodDark:mat(0x3f2a1c),
+  roof:mat(0x4a505c), roofEdge:mat(0x30353f), lime:mat(0xeee9df), dancheongG:mat(0x2e7d5b), dancheongR:mat(0xa3322a),
+};
+const latticeTex = tex(256, 256, (g, w, h) => {
+  g.fillStyle = '#f7f0e0'; g.fillRect(0, 0, w, h);
+  g.strokeStyle = '#6b4630'; g.lineWidth = 10; g.strokeRect(5, 5, w - 10, h - 10);
+  g.lineWidth = 4;
+  for (let i = 1; i < 7; i++) { g.beginPath(); g.moveTo(i * w / 7, 0); g.lineTo(i * w / 7, h); g.stroke(); }
+  for (const y of [h * .2, h * .5, h * .8]) for (let k = -1; k <= 1; k++) { g.beginPath(); g.moveTo(0, y + k * 10); g.lineTo(w, y + k * 10); g.stroke(); }
+});
+const latticeMat = new THREE.MeshStandardMaterial({ map:latticeTex, emissive:0xffc070, emissiveMap:latticeTex, emissiveIntensity:.04, roughness:.8 });
+const lanternRed = new THREE.MeshStandardMaterial({ color:0xc62828, emissive:0xff4a2a, emissiveIntensity:.15, roughness:.6 });
+const lanternBlue = new THREE.MeshStandardMaterial({ color:0x1e4fa3, emissive:0x3a6cff, emissiveIntensity:.1, roughness:.6 });
+const hyunpanMats = [];
+function hyunpan(text, sub) {
+  const t = tex(1024, 240, (g, w, h) => {
+    const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#4a2d1b'); gr.addColorStop(1, '#2e1a10'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(255,255,255,.05)'; g.lineWidth = 2; for (let i = 0; i < 18; i++) { g.beginPath(); g.moveTo(0, 12 + i * 13); g.bezierCurveTo(w * .3, 6 + i * 13, w * .6, 20 + i * 13, w, 10 + i * 13); g.stroke(); }
+    g.strokeStyle = GOLD_CSS; g.lineWidth = 8; g.strokeRect(14, 14, w - 28, h - 28); g.lineWidth = 2; g.strokeRect(28, 28, w - 56, h - 56);
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#f1d38e'; g.shadowColor = 'rgba(0,0,0,.5)'; g.shadowBlur = 6;
+    g.font = `${sub ? 116 : 130}px ${HAN}`; g.fillText(text, w / 2, sub ? h / 2 + 20 : h / 2 + 8);
+    if (sub) { g.font = `700 30px ${NOTO}`; g.fillStyle = '#d9b77a'; g.fillText(sub, w / 2, 50); }
+  });
+  const m = new THREE.MeshStandardMaterial({ map:t, emissive:0xffffff, emissiveMap:t, emissiveIntensity:.05, roughness:.7 });
+  hyunpanMats.push(m); return m;
+}
+function verticalBannerTex(text, bg = WINE_CSS) {
+  return tex(160, 480, (g, w, h) => {
+    g.fillStyle = bg; g.fillRect(0, 0, w, h);
+    g.strokeStyle = GOLD_CSS; g.lineWidth = 6; g.strokeRect(10, 10, w - 20, h - 20);
+    g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `78px ${HAN}`;
+    const chars = [...text]; const step = (h - 70) / chars.length;
+    chars.forEach((c, i) => g.fillText(c, w / 2, 45 + step * (i + .5)));
+  });
+}
+function makeLantern() {
+  const g = new THREE.Group();
+  g.add(cyl(.02, .02, .4, HK.woodDark, 0, .32, 0, 4));
+  g.add(cyl(.12, .2, .07, HK.woodDark, 0, .12, 0, 10));
+  g.add(cyl(.21, .21, .27, lanternRed, 0, -.06, 0, 14));
+  g.add(cyl(.21, .19, .25, lanternBlue, 0, -.32, 0, 14));
+  g.add(cyl(.15, .1, .06, HK.woodDark, 0, -.47, 0, 10));
+  g.add(cyl(.015, .015, .25, lanternRed, 0, -.62, 0, 4));
+  return g;
+}
+function hanokRoof(L, halfD, H) {
+  const g = new THREE.Group(), N = 28, T = .38;
+  const yTop = u => H * Math.pow(1 - u, 1.55) + .6 * Math.pow(u, 8);
+  const pts = []; for (let i = 0; i <= N; i++) { const z = -halfD + 2 * halfD * i / N; pts.push([z, yTop(Math.abs(z) / halfD)]); }
+  const shape = new THREE.Shape(); shape.moveTo(pts[0][0], pts[0][1]);
+  for (const [z, y] of pts.slice(1)) shape.lineTo(z, y);
+  for (let i = N; i >= 0; i--) shape.lineTo(pts[i][0], pts[i][1] - T);
+  const geo = new THREE.ExtrudeGeometry(shape, { depth:L, bevelEnabled:false });
+  geo.translate(0, 0, -L / 2); geo.rotateY(Math.PI / 2);
+  const roof = new THREE.Mesh(geo, HK.roof); g.add(roof);
+  // tile ends along both eaves (instanced)
+  const n = Math.floor(L / .42), tileGeo = new THREE.CylinderGeometry(.14, .14, .22, 8); tileGeo.rotateX(Math.PI / 2);
+  const inst = new THREE.InstancedMesh(tileGeo, HK.roofEdge, n * 2), m4 = new THREE.Matrix4();
+  for (let i = 0; i < n; i++) for (const sgn of [-1, 1]) { m4.makeTranslation(-L / 2 + .21 + i * .42, yTop(1) - T / 2, sgn * (halfD + .02)); inst.setMatrixAt(i * 2 + (sgn > 0 ? 1 : 0), m4); }
+  g.add(inst);
+  // ridge with lime bands and upturned ends
+  g.add(box(L * .94, .5, .6, HK.roofEdge, 0, H + .12, 0), box(L * .94, .1, .64, HK.lime, 0, H - .05, 0), box(L * .94, .08, .64, HK.lime, 0, H + .25, 0));
+  for (const sgn of [-1, 1]) { const e = box(.5, .7, .62, HK.roofEdge, sgn * L * .47, H + .32, 0); e.rotation.z = -sgn * .35; g.add(e); }
+  return g;
+}
+function makeHanok({ w, d, h = 4.5, base = .6, sign, signW = 7, accent = null, lanterns = true }) {
+  const g = new THREE.Group(), y0 = base;
+  const bw = w + 2.2, bd = d + 2.2;
+  g.add(box(bw, base, bd, HK.stone, 0, base / 2, 0), box(bw + .1, .08, bd + .1, HK.stoneDark, 0, base, 0));
+  g.add(box(4.4, base / 2, 1.4, HK.stone, 0, base / 4, bd / 2 + .7), box(4.4, base / 2, .7, HK.stone, 0, base * .75, bd / 2 + .35));
+  g.add(box(w, h, d, HK.wall, 0, y0 + h / 2, 0));
+  g.add(box(w + .06, .45, d + .06, HK.wood, 0, y0 + .22, 0), box(w + .06, .14, d + .06, HK.wood, 0, y0 + h * .74, 0));
+  g.add(box(w + .6, .36, d + .6, HK.woodDark, 0, y0 + h - .18, 0));
+  if (accent) { g.add(box(w + .64, .12, .05, HK.dancheongG, 0, y0 + h - .42, d / 2 + .31), box(w + .64, .08, .05, accent, 0, y0 + h - .3, d / 2 + .32)); }
+  const bays = Math.max(3, Math.round(w / 3.2)), bayW = w / bays;
+  for (let i = 0; i <= bays; i++) {
+    const x = -w / 2 + i * bayW;
+    for (const z of [d / 2 + .05, -d / 2 - .05]) { g.add(cyl(.2, .22, h, HK.wood, x, y0 + h / 2, z, 10), cyl(.34, .38, .16, HK.stoneDark, x, y0 + .08, z, 10)); }
+    if (i < bays) {
+      const cx = x + bayW / 2, isDoor = Math.abs(cx) < bayW * .6;
+      const ph = isDoor ? h * .66 : h * .5, py = isDoor ? y0 + .45 + ph / 2 : y0 + .5 + ph / 2 + .3;
+      const panel = new THREE.Mesh(new THREE.PlaneGeometry(bayW - .5, ph), latticeMat); panel.position.set(cx, py, d / 2 + .02); g.add(panel);
+      if (isDoor) g.add(box(.06, ph, .06, HK.woodDark, cx, py, d / 2 + .05));
+    }
+  }
+  for (const sx of [-1, 1]) for (const k of [-.25, .25]) { const p2 = new THREE.Mesh(new THREE.PlaneGeometry(d * .3, h * .38), latticeMat); p2.position.set(sx * (w / 2 + .02), y0 + h * .48, k * d); p2.rotation.y = sx * Math.PI / 2; g.add(p2); }
+  const roof = hanokRoof(w + 3.4, d / 2 + 2.0, d * .3 + 1.3); roof.position.y = y0 + h - .02; g.add(roof);
+  if (sign) {
+    const sg = new THREE.Mesh(new THREE.BoxGeometry(signW, signW * .235, .16), [HK.woodDark, HK.woodDark, HK.woodDark, HK.woodDark, sign, HK.woodDark]);
+    sg.position.set(0, y0 + h - .78, d / 2 + .5); sg.rotation.x = -.08; g.add(sg);
+  }
+  if (lanterns) for (const x of [-w / 2 + .9, -w * .28, w * .28, w / 2 - .9]) { const l = makeLantern(); l.position.set(x, y0 + h - .78, d / 2 + .55); g.add(l); }
+  shadowAll(g);
+  return { g, hx:bw / 2, hz:bd / 2, stepZ:bd / 2 + 1.4 };
+}
+function makeBanner(x, z, text, bg) {
+  const g = new THREE.Group(), cloth = new THREE.MeshStandardMaterial({ map:verticalBannerTex(text, bg), side:THREE.DoubleSide, roughness:.9 });
+  g.add(cyl(.06, .07, 4.4, HK.woodDark, 0, 2.2, 0, 8), box(1.15, .06, .06, HK.woodDark, .55, 4.25, 0));
+  const c = new THREE.Mesh(new THREE.PlaneGeometry(1, 3), cloth); c.position.set(.55, 2.7, 0); g.add(c);
+  g.position.set(x, 0, z); g.userData.cloth = c; shadowAll(g, true, false); scene.add(g); addCircle(x, z, .25);
+  banners.push(c); return g;
+}
+const banners = [];
+function stoneWall(x0, z0, x1, z1) {
+  const len = Math.hypot(x1 - x0, z1 - z0), a = -Math.atan2(z1 - z0, x1 - x0), g = new THREE.Group();
+  g.add(box(len, 1.3, .7, HK.stone, 0, .65, 0), box(len + .2, .12, 1.0, HK.roofEdge, 0, 1.36, 0), box(len + .1, .14, .5, HK.roof, 0, 1.48, 0));
+  const n = Math.floor(len / .9); for (let i = 0; i < n; i++) for (const row of [.32, .82]) { const st = box(.7 + Math.random() * .2, .38, .08, HK.stoneDark, -len / 2 + .45 + i * .9 + (row > .5 ? .3 : 0), row, .36); if (Math.abs(st.position.x) < len / 2 - .3) g.add(st); }
+  g.position.set((x0 + x1) / 2, 0, (z0 + z1) / 2); g.rotation.y = a; shadowAll(g); scene.add(g);
+  addBox(Math.min(x0, x1) - .4, Math.max(x0, x1) + .4, Math.min(z0, z1) - .4, Math.max(z0, z1) + .4);
+}
+function makePine(sc) {
+  const t = new THREE.Group(), trunk = mat(0x8a5a3c), needle = mat(0x2f5d3a), needle2 = mat(0x3d7046);
+  const t1 = cyl(.18, .28, 2.2, trunk, 0, 1.1, 0, 7); t1.rotation.z = .12; t.add(t1);
+  const t2 = cyl(.13, .18, 1.8, trunk, .35, 2.9, 0, 7); t2.rotation.z = -.3; t.add(t2);
+  for (const [x, y, z, r, m] of [[.6, 3.8, 0, 1.6, needle], [-.4, 3.2, .3, 1.2, needle2], [.9, 4.5, -.2, 1.1, needle2], [-.1, 4.3, -.4, .9, needle]]) {
+    const c = new THREE.Mesh(blobGeo, m); c.position.set(x, y, z); c.scale.set(r / 1.4, r * .32 / 1.4, r / 1.4); t.add(c);
+  }
+  t.scale.setScalar(sc); return t;
+}
+
 const outdoorG = zoneGroup(() => {
   const ground = new THREE.Mesh(new THREE.CircleGeometry(100, 64), mat(0x8cc66d));
   ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
   const flat = (w, d, color, x, z, y = .02) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), mat(color)); m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); m.receiveShadow = true; scene.add(m); };
-  flat(200, 8, 0x5b6270, 0, 10);
-  for (let x = -96; x <= 96; x += 6) flat(2.6, .25, 0xffffff, x, 10, .03);
-  flat(200, 3, 0xd9d4cc, 0, 4.5, .03); flat(200, 3, 0xd9d4cc, 0, 15.5, .03);
-  flat(64, 6, 0xe8ddd0, -12, 0, .025);
+  // stone-paved village street and an earthen yard
+  const pavingTex = tex(256, 256, (g, w, h) => {
+    g.fillStyle = '#b9b3a6'; g.fillRect(0, 0, w, h);
+    for (let r = 0; r < 6; r++) for (let c = 0; c < 5; c++) {
+      const x = c * 52 + (r % 2) * 26 - 10, y = r * 44; g.fillStyle = ['#c9c3b6', '#bfb8aa', '#d2ccbf', '#b3ac9e'][(r * 3 + c) % 4];
+      g.beginPath(); g.roundRect ? g.roundRect(x + 3, y + 3, 46, 38, 8) : g.rect(x + 3, y + 3, 46, 38); g.fill();
+    }
+  });
+  pavingTex.wrapS = pavingTex.wrapT = THREE.RepeatWrapping; pavingTex.repeat.set(40, 3);
+  const street = new THREE.Mesh(new THREE.PlaneGeometry(200, 14), new THREE.MeshStandardMaterial({ map:pavingTex, roughness:.95 }));
+  street.rotation.x = -Math.PI / 2; street.position.set(0, .02, 10); street.receiveShadow = true; scene.add(street);
+  flat(76, 6.4, 0xd9c8a3, -14, 0, .025);
 
-  // --- main butcher shop (2 stories)
-  const shop = new THREE.Group();
-  shop.add(box(26, 9, 14, creamM, 0, 4.5, 0));
-  shop.add(box(26.06, 1.4, 14.06, wineM, 0, .7, 0));
-  shop.add(box(26.06, .3, 14.06, wineM, 0, 5.1, 0));
-  shop.add(box(26.6, .6, 14.6, wineM, 0, 9.3, 0));
-  for (const sx of [-8.5, -3.6, 3.6, 8.5]) shop.add(box(3.6, 2.8, .12, windowMat, sx, 2.9, 7.02), box(3.9, .15, .35, wineM, sx, 1.45, 7.1));
-  for (let i = 0; i < 6; i++) shop.add(box(2.4, 1.8, .12, windowMat, -10 + i * 4, 7, 7.02));
-  shop.add(box(3, 3.2, .14, mat(0x4a1020), 0, 1.6, 7.03));
-  shop.add(box(2.4, 1.6, .16, windowMat, 0, 2.2, 7.05));
-  shop.add(box(.12, .5, .2, goldM, 1.1, 1.5, 7.15), box(.12, .5, .2, goldM, -1.1, 1.5, 7.15));
-  const awning = box(25, .1, 2.6, new THREE.MeshStandardMaterial({ map:awningTex, roughness:.8 }), 0, 4.55, 8.2); awning.rotation.x = .3; shop.add(awning);
-  const sign = new THREE.Mesh(new THREE.BoxGeometry(14, 2.4, .35), [wineM, wineM, wineM, wineM, signM, wineM]); sign.position.set(0, 7.1, 7.3); shop.add(sign);
-  shop.position.set(0, 0, -10); shadowAll(shop); scene.add(shop);
-  addBox(-13.2, 13.2, -17.2, -2.8);
-  interactables.push({ pos:new THREE.Vector3(0, 0, -2.2), r:2.4, label:`${BRAND.name} 정육점 들어가기`, act:() => goTo('in') });
+  // --- main butcher shop: hanok
+  const shopH = makeHanok({ w:22, d:12, h:4.8, sign:hyunpan(BRAND.name, '1++ 韓牛 專門'), signW:8.4, accent:wineM });
+  shopH.g.position.set(0, 0, -11); scene.add(shopH.g);
+  addBox(-shopH.hx, shopH.hx, -11 - shopH.hz, -11 + shopH.hz); addBox(-2.3, 2.3, -11 + shopH.hz, -11 + shopH.stepZ);
+  interactables.push({ pos:new THREE.Vector3(0, 0, -11 + shopH.stepZ + .6), r:2.4, label:`${BRAND.name} 정육점 들어가기`, act:() => goTo('in') });
+  makeBanner(-8.6, -2.6, '명품한우', WINE_CSS); makeBanner(7.4, -2.6, '산지직송', WINE_CSS);
 
-  // --- gift hall
-  const gh = new THREE.Group(), ghWine = mat(0x6a1a2d);
-  gh.add(box(16, 6.5, 11, ghWine, 0, 3.25, 0));
-  gh.add(box(16.4, .5, 11.4, goldM, 0, 6.6, 0));
-  gh.add(box(16.08, .25, 11.08, goldM, 0, .9, 0));
-  for (const sx of [-5, 5]) {
-    gh.add(box(4, 3, .12, windowMat, sx, 2.5, 5.52), box(4.2, .12, .8, goldM, sx, 1.06, 5.9));
-    for (let k = 0; k < 3; k++) { const gm = makeGiftMesh(k + (sx > 0 ? 2 : 0), 1.15); gm.position.set(sx - 1.3 + k * 1.3, 1.35, 5.95); gm.rotation.y = (k - 1) * .2; gh.add(gm); }
-  }
-  gh.add(box(2.6, 3.2, .14, mat(0x2a0a12), 0, 1.6, 5.53));
-  gh.add(box(.12, .5, .2, goldM, .9, 1.5, 5.65));
-  const gsign = new THREE.Mesh(new THREE.BoxGeometry(9, 1.8, .3), [goldM, goldM, goldM, goldM, giftSignM, goldM]); gsign.position.set(0, 4.75, 5.7); gh.add(gsign);
-  // giant ribbon on the roof
-  const rib = smooth(BRAND.gold, { metalness:.4, roughness:.35 });
-  gh.add(box(16.5, .4, 1.2, rib, 0, 6.9, 0), box(1.2, .4, 11.5, rib, 0, 6.9, 0));
-  for (const k of [-1, 1]) { const c = new THREE.Mesh(new THREE.ConeGeometry(.9, 1.8, 4), rib); c.position.set(k * .8, 7.6, 0); c.rotation.z = k * Math.PI / 2.4; gh.add(c); }
-  gh.position.set(-32, 0, -8.5); shadowAll(gh); scene.add(gh);
-  addBox(-40.2, -23.8, -14.2, -2.4);
-  interactables.push({ pos:new THREE.Vector3(-32, 0, -2.2), r:2.4, label:'🎁 선물세트관 들어가기', act:() => goTo('gift') });
-  for (const [x, y, z, s, k] of [[-21.8, .32, -3.6, 1.6, 0], [-21.6, .26, -1.6, 1.3, 1], [-21.8, .87, -3.6, 1.1, 2]]) {
-    const gm = makeGiftMesh(k, s); gm.position.set(x, y, z); gm.rotation.y = .3 * k; scene.add(gm);
-  }
-  addCircle(-21.8, -3.6, .7); addCircle(-21.6, -1.6, .55);
+  // --- gift hall: hanok with wine & gold accents
+  const giftH = makeHanok({ w:12, d:9, h:4.3, sign:hyunpan('선물세트관', `${BRAND.name} GIFT`), signW:6.2, accent:wineM });
+  giftH.g.position.set(-32, 0, -9.5); scene.add(giftH.g);
+  addBox(-32 - giftH.hx, -32 + giftH.hx, -9.5 - giftH.hz, -9.5 + giftH.hz); addBox(-34.3, -29.7, -9.5 + giftH.hz, -9.5 + giftH.stepZ);
+  interactables.push({ pos:new THREE.Vector3(-32, 0, -9.5 + giftH.stepZ + .6), r:2.4, label:'🎁 선물세트관 들어가기', act:() => goTo('gift') });
+  makeBanner(-38, -2.2, '명절선물', '#4a1020');
+  // a big wrapped bojagi bundle + gift boxes by the steps
+  const bojagi = new THREE.Group(), cloth = smooth(BRAND.wine, { roughness:.75 });
+  const bb = new THREE.Mesh(new THREE.SphereGeometry(.9, 18, 14), cloth); bb.scale.set(1.15, .8, 1.15); bb.position.y = .72; bojagi.add(bb);
+  for (const k of [-1, 1]) { const ear = new THREE.Mesh(new THREE.ConeGeometry(.28, .7, 6), cloth); ear.position.set(k * .3, 1.55, 0); ear.rotation.z = -k * .7; bojagi.add(ear); }
+  bojagi.add(new THREE.Mesh(new THREE.SphereGeometry(.2, 10, 8), smooth(BRAND.gold, { metalness:.3 })).translateY(1.38));
+  bojagi.position.set(-25.6, 0, -1.6); shadowAll(bojagi); scene.add(bojagi); addCircle(-25.6, -1.6, 1.1);
+  for (const [x, y, z, sc, k] of [[-23.4, .32, -2.2, 1.6, 0], [-23.2, .26, -.4, 1.3, 1], [-23.4, .87, -2.2, 1.1, 6]]) { const gm = makeGiftMesh(k % GIFTS.length, sc); gm.position.set(x, y, z); gm.rotation.y = .3 * k; scene.add(gm); }
+  addCircle(-23.4, -2.2, .7); addCircle(-23.2, -.4, .55);
 
+  // guestbook board (hanok-style notice board with a little giwa roof)
+  { const gbg = new THREE.Group();
+    gbCanvas = document.createElement('canvas'); gbCanvas.width = 1024; gbCanvas.height = 560;
+    gbTex = new THREE.CanvasTexture(gbCanvas); gbTex.colorSpace = THREE.SRGBColorSpace; gbTex.anisotropy = 4;
+    const face = new THREE.MeshStandardMaterial({ map:gbTex, roughness:.85, emissive:0xffffff, emissiveMap:gbTex, emissiveIntensity:.08 }); hyunpanMats.push(face);
+    gbg.add(new THREE.Mesh(new THREE.BoxGeometry(6, 3.3, .22), [HK.woodDark, HK.woodDark, HK.woodDark, HK.woodDark, face, HK.woodDark]).translateY(2.35));
+    for (const x of [-3.15, 3.15]) gbg.add(cyl(.13, .15, 4.4, HK.wood, x, 2.2, 0, 8));
+    const r = hanokRoof(7, .7, .55); r.position.y = 4.15; gbg.add(r);
+    gbg.position.set(19.5, 0, -2.2); shadowAll(gbg); scene.add(gbg);
+    addBox(16.2, 22.8, -2.5, -1.9);
+    interactables.push({ pos:new THREE.Vector3(19.5, 0, -.8), r:2.4, label:'📝 응원 방명록 남기기', act:() => openGB() });
+    drawGBBoard(); }
+
+  // stone walls behind the buildings, jangdokdae, pyeongsang
+  stoneWall(-14, -21.5, 14, -21.5); stoneWall(-40, -17.5, -24, -17.5);
+  const jang = new THREE.Group(); jang.add(box(3.6, .35, 2.4, HK.stone, 0, .175, 0));
+  const jarM = smooth(0x5b3a26, { roughness:.3 }), lidM = smooth(0x4a2f1f, { roughness:.4 });
+  [[-1.1, -.5, .55], [0, -.55, .6], [1.1, -.5, .5], [-.6, .5, .45], [.6, .5, .5]].forEach(([x, z, r]) => { const j = new THREE.Mesh(new THREE.SphereGeometry(r, 14, 12), jarM); j.scale.y = 1.15; j.position.set(x, .35 + r * 1.05, z); jang.add(j); jang.add(cyl(r * .55, r * .6, .12, lidM, x, .35 + r * 2.2, z, 12)); });
+  jang.position.set(16.2, 0, -8); shadowAll(jang); scene.add(jang); addBox(14.3, 18.1, -9.3, -6.7);
+  const pyeong = new THREE.Group(), pw = mat(0x9a6b44);
+  pyeong.add(box(3.2, .14, 2.2, pw, 0, .48, 0)); for (const [a, b] of [[-1.45, -.95], [1.45, -.95], [-1.45, .95], [1.45, .95]]) pyeong.add(box(.14, .48, .14, pw, a, .24, b));
+  pyeong.add(box(.9, .3, .6, mat(0x7a4f30), 0, .7, 0));
+  pyeong.position.set(-11, 0, .4); shadowAll(pyeong); scene.add(pyeong); addBox(-12.6, -9.4, -.7, 1.5);
+  seats.push({ pos:new THREE.Vector3(-12.2, 0, .4), top:.6, heading:Math.PI / 2, table:null, occupant:null }, { pos:new THREE.Vector3(-9.8, 0, .4), top:.6, heading:-Math.PI / 2, table:null, occupant:null });
   // A-frame board
   const aframe = new THREE.Group(), boardM = new THREE.MeshStandardMaterial({ map:boardTex, roughness:.9 });
   for (const s of [1, -1]) { const b = new THREE.Mesh(new THREE.BoxGeometry(1, 1.4, .05), [mat(0x8d6748), mat(0x8d6748), mat(0x8d6748), mat(0x8d6748), boardM, boardM]); b.position.set(0, .68, s * .2); b.rotation.x = s * .25; aframe.add(b); }
-  aframe.position.set(5.2, 0, -1.3); aframe.rotation.y = -.35; shadowAll(aframe); scene.add(aframe);
-  addCircle(5.2, -1.3, .6);
-  interactables.push({ pos:new THREE.Vector3(5.2, 0, -.6), r:1.4, label:'추천 메뉴 보기', act:() => openModal('menu') });
+  aframe.position.set(4.6, 0, -1.2); aframe.rotation.y = -.35; shadowAll(aframe); scene.add(aframe);
+  addCircle(4.6, -1.2, .6);
+  interactables.push({ pos:new THREE.Vector3(4.6, 0, -.5), r:1.4, label:'추천 메뉴 보기', act:() => openModal('menu') });
 
   // truck
   const truck = new THREE.Group(), truckSide = new THREE.MeshStandardMaterial({ map:truckTex, roughness:.6 });
@@ -613,14 +811,14 @@ const outdoorG = zoneGroup(() => {
   addBox(22.3, 29.7, -.25, 2.25);
   interactables.push({ pos:new THREE.Vector3(26, 0, 2.9), r:2.4, label:'배송 트럭 구경하기', act:() => toast(`🚚 ${BRAND.name} 산지직송 트럭이에요!`) });
 
-  makeBench(-16.5, 1.4, 0); makeBench(16.5, 1.4, 0); makeBench(-8, 1.4, 0);
+  makeBench(-18.5, 2.2, 0); makeBench(14.5, 2.2, 0);
   makeBench(-35, -27.6, Math.PI); makeBench(-35, -36.4, 0);
   const bed = cyl(3, 3.1, .5, mat(0x8d6748), -35, .25, -32, 20); bed.receiveShadow = true; scene.add(bed); addCircle(-35, -32, 3.1);
   for (let i = 0; i < 40; i++) { const a = Math.random() * 6.28, d = Math.random() * 2.6; const f = new THREE.Mesh(flowerGeo, flowerMs[i % 4]); f.position.set(-35 + Math.sin(a) * d, .6, -32 + Math.cos(a) * d); scene.add(f); }
 
   [[-48, 3.2], [-20, 16.8], [20, 3.2], [44, 16.8], [-56, 16.8], [50, 3.2]].forEach(([x, z], i) => {
-    scene.add(cyl(.08, .12, 3.6, smooth(0x2b2b2b), x, 1.8, z, 8));
-    const h = new THREE.Mesh(new THREE.SphereGeometry(.32, 12, 10), lampMat); h.position.set(x, 3.75, z); scene.add(h);
+    scene.add(box(.18, 3.4, .18, HK.woodDark, x, 1.7, z), box(.9, .12, .12, HK.woodDark, x + .35, 3.35, z));
+    const l = makeLantern(); l.position.set(x + .7, 2.95, z); l.scale.setScalar(1.25); shadowAll(l, true, false); scene.add(l);
     addCircle(x, z, .3);
     if (i < 3) { const L = new THREE.PointLight(0xffc46b, 0, 22, 1.6); L.position.set(x, 3.5, z); scene.add(L); lampLights.push(L); }
   });
@@ -676,7 +874,7 @@ const outdoorG = zoneGroup(() => {
     if (!isFree(x, z, 2.8)) continue;
     const s = .8 + Math.random() * .7, t = new THREE.Group();
     t.add(new THREE.Mesh(trunkGeo, trunkM).translateY(.8));
-    if (Math.random() < .4) { t.add(new THREE.Mesh(coneGeo, leafMs[2]).translateY(2.8)); const c2 = new THREE.Mesh(coneGeo, leafMs[0]); c2.position.y = 4; c2.scale.setScalar(.75); t.add(c2); }
+    if (Math.random() < .5) { t.add(makePine(1)); t.children[0].visible = false; }
     else { const m = Math.random() < .2 ? blossomM : pick(leafMs); const b = new THREE.Mesh(blobGeo, m); b.position.y = 2.6; b.rotation.set(Math.random(), Math.random(), 0); t.add(b); }
     t.scale.setScalar(s); t.position.set(x, 0, z); shadowAll(t, true, false); scene.add(t);
     addCircle(x, z, .5 * s); placed++;
@@ -706,13 +904,18 @@ function makeRoom(O, hw, hd, opts) {
   floor.rotation.x = -Math.PI / 2; floor.position.set(O.x, .02, O.z); floor.receiveShadow = true; scene.add(floor);
   const yard = new THREE.Mesh(new THREE.PlaneGeometry(120, 120), mat(0x6f9b55)); yard.rotation.x = -Math.PI / 2; yard.position.set(O.x, -.01, O.z); scene.add(yard);
   const wall = (ax, az, bx, bz, nx, nz) => {
-    const lowM = mat(opts.low, { transparent:true }), upM = mat(opts.up, { transparent:true }), trimM = smooth(BRAND.gold, { transparent:true, metalness:.4 });
+    const lowM = mat(opts.low, { transparent:true }), upM = mat(opts.up, { transparent:true }), trimM = smooth(BRAND.gold, { transparent:true, metalness:.4 }), extraMats = [];
     const len = Math.hypot(bx - ax, bz - az), alongX = Math.abs(bz - az) < .01;
     const cx = O.x + (ax + bx) / 2, cz = O.z + (az + bz) / 2;
     const mk = (h, y, m) => { const b = alongX ? box(len, h, .3, m) : box(.3, h, len, m); b.position.set(cx, y, cz); b.receiveShadow = true; scene.add(b); };
     mk(1.2, .6, lowM); mk(H - 1.2, 1.2 + (H - 1.2) / 2, upM); mk(.08, 1.24, trimM);
+    const pilM = mat(0x5b3b27, { transparent:true }), beamM = mat(0x3f2a1c, { transparent:true });
+    mk(.4, H - .2, beamM);
+    const nP = Math.max(1, Math.floor(len / 4)), ux = alongX ? 1 : 0, uz = alongX ? 0 : 1;
+    for (let i = 0; i <= nP; i++) { const off = -len / 2 + i * len / nP; const pl = box(.34, H, .34, pilM, cx + ux * off + nx * .3, H / 2, cz + uz * off + nz * .3); pl.castShadow = true; scene.add(pl); }
+    extraMats.push(pilM, beamM);
     if (alongX) addBox(cx - len / 2, cx + len / 2, cz - .2, cz + .2); else addBox(cx - .2, cx + .2, cz - len / 2, cz + len / 2);
-    const w = { mats:[lowM, upM, trimM], center:new THREE.Vector3(cx, 2, cz), n:new THREE.Vector3(nx, 0, nz) };
+    const w = { mats:[lowM, upM, trimM, ...extraMats], center:new THREE.Vector3(cx, 2, cz), n:new THREE.Vector3(nx, 0, nz) };
     walls.push(w); return w;
   };
   const back = wall(-hw, -hd, hw, -hd, 0, 1), left = wall(-hw, -hd, -hw, hd, 1, 0), right = wall(hw, -hd, hw, hd, -1, 0);
@@ -754,7 +957,7 @@ function giftDisplay(O, x, z, setIdx, rotY = 0) {
 const tables = [];
 const shopG = zoneGroup(() => {
   const O = IN;
-  const R = makeRoom(O, 18, 12, { floorTex:woodTex, low:BRAND.wine, up:0xf3e7d8, height:4.8, exitTo:new THREE.Vector3(0, 0, -1.4) });
+  const R = makeRoom(O, 18, 12, { floorTex:woodTex, low:0x4a3020, up:0xf4eee2, height:4.8, exitTo:new THREE.Vector3(0, 0, -1.4) });
   wallPlane(R.back, menuTex, 7.2, 3.9, new THREE.Vector3(O.x - 4, 3.0, O.z - 11.83), 0, .25);
   wallPlane(R.right, gradeTex, 2.4, 3.2, new THREE.Vector3(O.x + 17.83, 2.6, O.z + 1), -Math.PI / 2);
   lbCanvas = document.createElement('canvas'); lbCanvas.width = 512; lbCanvas.height = 640;
@@ -780,6 +983,10 @@ const shopG = zoneGroup(() => {
   // hanging meat-hook rail decoration
   scene.add(box(10, .08, .08, smooth(0x999999, { metalness:.8 }), O.x - 4, 4.1, O.z - 11.2));
   interactables.push({ pos:new THREE.Vector3(O.x - 12, 0, O.z - 8), r:2, label:'메뉴판 보기', act:() => openModal('menu') });
+  const hanjiM = new THREE.MeshStandardMaterial({ color:0xfff4dc, emissive:0xffd9a0, emissiveIntensity:.9, roughness:.9 });
+  for (const x of [-13, -7, -1, 5]) { scene.add(cyl(.01, .01, 1, HK.woodDark, O.x + x, 4.3, O.z - 8.6, 4), cyl(.32, .32, .55, hanjiM, O.x + x, 3.55, O.z - 8.6, 14)); }
+  wallPlane(R.left, latticeTex, 3.4, 2.2, new THREE.Vector3(O.x - 17.83, 2.5, O.z + 8), Math.PI / 2, .25);
+  wallPlane(R.right, latticeTex, 3.4, 2.2, new THREE.Vector3(O.x + 17.83, 2.5, O.z + 8), -Math.PI / 2, .25);
 
   // fridge
   const fridge = new THREE.Group();
@@ -792,7 +999,7 @@ const shopG = zoneGroup(() => {
   interactables.push({ pos:new THREE.Vector3(O.x + 14.5, 0, O.z - 9.3), r:1.6, label:'음료 꺼내기', act:() => say(player, pick(['🥤 시원하다!', '🍺 고기엔 역시…', '🧃 식혜 최고'])) });
 
   // mini gift corner (links to gift hall)
-  giftDisplay(O, 15.2, -2.5, 1, -Math.PI / 2);
+  giftDisplay(O, 15.2, -2.5, 0, -Math.PI / 2);
   makeBench(O.x + 16.6, O.z + 6, -Math.PI / 2);
   for (const [x, z] of [[-17, -11], [17, 11], [-17, 11], [11, -11]]) plant(O, x, z);
 
@@ -832,7 +1039,7 @@ const shopG = zoneGroup(() => {
 let heroBox;
 const giftG = zoneGroup(() => {
   const O = GIFT;
-  const R = makeRoom(O, 12, 9, { floorTex:marbleTex, floorRough:.3, low:0x5a1426, up:0xf6ebe0, height:5, exitTo:new THREE.Vector3(-32, 0, -1.4) });
+  const R = makeRoom(O, 12, 9, { floorTex:marbleTex, floorRough:.3, low:0x5a1426, up:0xf4eee2, height:5, exitTo:new THREE.Vector3(-32, 0, -1.4) });
   wallPlane(R.back, giftBannerTex, 9, 2.64, new THREE.Vector3(O.x, 3.4, O.z - 8.83), 0, .3);
   // back wall shelves full of boxes
   for (const sx of [-8.2, 8.2]) {
@@ -846,24 +1053,23 @@ const giftG = zoneGroup(() => {
   // hero pedestal (VIP)
   const ped = new THREE.Group();
   ped.add(cyl(1.4, 1.5, .9, wineM, 0, .45, 0, 32), cyl(1.45, 1.45, .06, goldM, 0, .92, 0, 32));
-  heroBox = makeGiftMesh(0, 2.4); heroBox.position.y = 1.45; ped.add(heroBox);
+  heroBox = makeGiftMesh(HERO, 2.4); heroBox.position.y = 1.45; ped.add(heroBox);
   ped.position.set(O.x, 0, O.z - 1.5); shadowAll(ped, true, true); scene.add(ped);
   addCircle(O.x, O.z - 1.5, 1.5);
-  displays.push({ pos:new THREE.Vector3(O.x, 0, O.z + .6), setIdx:0 });
-  interactables.push({ pos:new THREE.Vector3(O.x, 0, O.z + .6), r:1.8, label:`${GIFTS[0].name} 보기`, act:() => openGift(0) });
-  addSign(`👑 ${GIFTS[0].name}`, new THREE.Vector3(O.x, 3.6, O.z - 1.5));
+  displays.push({ pos:new THREE.Vector3(O.x, 0, O.z + .6), setIdx:HERO });
+  interactables.push({ pos:new THREE.Vector3(O.x, 0, O.z + .6), r:1.8, label:`${GIFTS[HERO].name} 보기`, act:() => openGift(HERO) });
+  addSign(`👑 ${GIFTS[HERO].name} ${GIFTS[HERO].title}`, new THREE.Vector3(O.x, 3.6, O.z - 1.5));
   const spot = new THREE.PointLight(0xfff0d0, 14, 10, 1.3); spot.position.set(O.x, 4.4, O.z - 1.5); scene.add(spot);
   // display islands
-  giftDisplay(O, -7.5, -3, 1, 0);
-  giftDisplay(O, 7.5, -3, 2, 0);
-  giftDisplay(O, -7.5, 3.5, 3, 0);
-  giftDisplay(O, 7.5, 3.5, 4, 0);
+  { const others = GIFTS.map((g, i) => i).filter(i => i !== HERO);
+    const spots = [[-7.5, -3.2], [7.5, -3.2], [-7.5, 2.6], [7.5, 2.6], [-3.4, 4.4], [3.4, 4.4]];
+    others.slice(0, spots.length).forEach((gi, k) => giftDisplay(O, spots[k][0], spots[k][1], gi, 0)); }
   // wrapping counter
   const ctr = new THREE.Group();
   ctr.add(box(4, 1.05, 1.2, wineM, 0, .525, 0), box(4.1, .06, 1.3, goldM, 0, 1.08, 0));
   const roll = cyl(.12, .12, 1, smooth(BRAND.gold), -1.2, 1.25, 0, 10); roll.rotation.z = Math.PI / 2; ctr.add(roll);
-  ctr.position.set(O.x + 7.5, 0, O.z + 7.2); shadowAll(ctr, true, true); scene.add(ctr);
-  addBox(O.x + 5.4, O.x + 9.6, O.z + 6.5, O.z + 7.9);
+  ctr.position.set(O.x + 10.6, 0, O.z + 6.6); ctr.rotation.y = Math.PI / 2; shadowAll(ctr, true, true); scene.add(ctr);
+  addBox(O.x + 9.9, O.x + 11.3, O.z + 4.5, O.z + 8.7);
   for (const [x, z] of [[-11, 8], [11, -4], [-11, -4]]) plant(O, x, z);
   for (const [x, z] of [[-6, 0], [6, 0]]) { const L = new THREE.PointLight(0xffe2b8, 9, 14, 1.3); L.position.set(O.x + x, 3.8, O.z + z); scene.add(L); }
 });
@@ -1044,7 +1250,7 @@ const NAMES = ['단골손님', '고기러버', '한우조아', '저녁은소고�
   '집들이선물', '스승의날', '어버이날', '차돌박이', '토시살', '제비추리', '우둔살', '양지머리', '고기는진리', '배부른곰', '먹방러', '산지직송팬', '소풍가는날', '야식생각'];
 let nameIdx = 0;
 const nextName = () => NAMES[nameIdx++ % NAMES.length];
-const OUT_LINES = [`${BRAND.name} 고기 사러 왔어요 🥩`, '목장에 소 보러 갈래요?', '오늘 저녁은 소고기다!', '선물세트관 가봤어요? 🎁', '트럭 귀엽다 🚚', '배고파요… 🤤', '사장님 친절하셔서 단골됐어요', '부모님 선물 사러 왔어요'];
+const OUT_LINES = [`${BRAND.name} 고기 사러 왔어요 🥩`, '목장에 소 보러 갈래요?', '오늘 저녁은 소고기다!', '선물세트관 가봤어요? 🎁', '트럭 귀엽다 🚚', '배고파요… 🤤', '사장님 친절하셔서 단골됐어요', '부모님 선물 사러 왔어요', '방명록에 응원 남겼어요 📝'];
 const IN_LINES = ['지글지글~ 🔥', '이 마블링 좀 봐요', '한 점 더!', '여기 진짜 맛집이네', '고기는 역시 한우죠', '육회도 시킬까요?', '사장님 여기 등심 추가요!', '이 집 고기 녹는다…'];
 const BROWSE_LINES = ['오늘 등심 때깔 좋다', '안심 300g 주세요~', '구이용은 어떤 게 좋아요?', '와 진열대 예쁘다'];
 const GIFT_LINES = ['VIP 세트 고급스럽다…', '부모님 선물로 딱이다 🎁', '포장 너무 예뻐요', '어떤 세트로 할까…', '명절 선물 여기서 해결!'];
@@ -1093,7 +1299,7 @@ function addStaff(name, look, pos, heading, lines, interactPos, label) {
 const owner = addStaff(BRAND.ownerName, { body:0xffffff, hair:'short', hairColor:0x2b1d14, hat:'chef', apron:true }, new THREE.Vector3(IN.x - 4, 0, IN.z - 11), 0, BRAND.ownerLines, new THREE.Vector3(IN.x - 4, 0, IN.z - 7.9), `${BRAND.ownerName}과 대화`);
 addStaff('정육 직원', { body:0xffffff, hair:'bun', hairColor:0x5d3a1a, hat:'cap', apron:true }, new THREE.Vector3(IN.x + 4, 0, IN.z - 11), 0,
   ['손질 바로 해드릴게요!', '구이용으로 두툼하게 썰어드릴까요?', '오늘 살치살 들어왔어요 ✨'], new THREE.Vector3(IN.x + 4, 0, IN.z - 7.9), '직원에게 말 걸기');
-const giftStaff = addStaff(BRAND.giftStaffName, { body:BRAND.wine, hair:'long', hairColor:0x2b1d14, hat:'none', apron:false }, new THREE.Vector3(GIFT.x + 7.5, 0, GIFT.z + 8.2), Math.PI, BRAND.giftStaffLines, new THREE.Vector3(GIFT.x + 7.5, 0, GIFT.z + 5.6), `${BRAND.giftStaffName}와 대화`);
+const giftStaff = addStaff(BRAND.giftStaffName, { body:BRAND.wine, hair:'long', hairColor:0x2b1d14, hat:'none', apron:false }, new THREE.Vector3(GIFT.x + 11.5, 0, GIFT.z + 6.6), -Math.PI / 2, BRAND.giftStaffLines, new THREE.Vector3(GIFT.x + 8.9, 0, GIFT.z + 6.6), `${BRAND.giftStaffName}와 대화`);
 
 function pickTarget(b) {
   for (let i = 0; i < 25; i++) {
@@ -1159,7 +1365,7 @@ function botReply(text) {
   const b = near[0][0], isStaff = b.mode === 'staff';
   let msg, em = null;
   if (/안녕|하이|hi|hello|ㅎㅇ/i.test(text)) { msg = isStaff ? `어서오세요 ${player.name}님! 🙇` : `${player.name}님 안녕하세요! 😊`; em = 'wave'; }
-  else if (/선물|세트|명절|포장/.test(text)) msg = b === giftStaff ? `${GIFTS[0].name}가 제일 인기예요! 진열대 앞에서 E를 눌러보세요 🎁` : '선물세트관은 정육점 왼쪽 건물이에요 🎁';
+  else if (/선물|세트|명절|포장/.test(text)) msg = b === giftStaff ? `${GIFTS[HERO].name} ${GIFTS[HERO].title} 세트가 제일 인기예요! 진열대 앞에서 E를 눌러보세요 🎁` : '선물세트관은 정육점 왼쪽 건물이에요 🎁';
   else if (/얼마|가격|메뉴/.test(text)) msg = isStaff ? '메뉴판이랑 진열대에서 확인하실 수 있어요!' : '카운터 쪽에 메뉴판 있어요!';
   else if (/스토어|주문|배송|택배/.test(text)) msg = '네이버 스마트스토어에서 주문하시면 집으로 보내드려요 📦';
   else if (/추천|뭐가 맛/.test(text)) msg = `${BRAND.menu[0].grade} ${BRAND.menu[0].cut} 강력 추천이요 🥩`;
@@ -1226,19 +1432,20 @@ function renderGiftList() {
   giftBody.append(el('h3', '', '선물세트'), el('div', 'sub', `${BRAND.name} 선물세트관 · 원하는 세트를 눌러보세요`));
   GIFTS.forEach((s, i) => {
     const r = el('div', 'mrow grow'); r.onclick = () => renderGiftDetail(i);
-    const t = el('div'); t.append(el('div', 'nm', s.name), el('div', 'ds', `${s.items} · ${s.weight}`));
-    r.append(gboxEl(s), t, el('div', 'pr', s.price)); giftBody.appendChild(r);
+    const t = el('div'); const nm = el('div', 'nm', `${s.name} `); nm.append(el('span', 'ds', `${s.title} · ${s.weight}`)); t.append(nm, el('div', 'ds', s.items));
+    const pr = el('div', 'pr'); if (s.original) pr.append(el('div', 'orig', s.original)); const now = el('div'); if (s.discount) now.append(el('span', 'disc', s.discount)); now.append(document.createTextNode(s.price)); pr.append(now);
+    r.append(gboxEl(s), t, pr); giftBody.appendChild(r);
   });
-  giftBody.append(storeLink(null, 'N 스마트스토어에서 전체 상품 보기 ↗'), el('small', 'note', '※ 상품 구성과 가격은 예시입니다'));
+  giftBody.append(storeLink(null, 'N 스마트스토어에서 전체 상품 보기 ↗'), el('small', 'note', '※ 가격·할인율은 스마트스토어 기준이며 변동될 수 있어요'));
 }
 function renderGiftDetail(i) {
   const s = GIFTS[i]; giftBody.textContent = '';
   const back = el('button', 'back', '‹ 전체 선물세트'); back.onclick = renderGiftList;
   const d = el('div', 'gdetail');
-  const gr = el('span', 'grade', s.grade);
-  d.append(gboxEl(s, true), gr, el('div', 'nm', s.name), el('div', 'items', `${s.items} · ${s.weight}`), el('div', 'ds', s.desc), el('div', 'pr', s.price));
+  const pr = el('div', 'pr'); if (s.original) pr.append(el('div', 'orig', s.original)); if (s.discount) pr.append(el('span', 'disc', s.discount)); pr.append(document.createTextNode(s.price));
+  d.append(gboxEl(s, true), el('div', 'nm', s.name), el('div', 'ds', `${s.title} · ${s.weight}`), el('div', 'items', s.items), pr);
   const buy = el('button', 'btn primary', '🎁 월드에서 구매하고 들기'); buy.onclick = () => buyGift(i);
-  giftBody.append(back, d, buy, storeLink(s, 'N 스마트스토어에서 실제 구매하기 ↗'), el('small', 'note', '월드 안 구매는 체험용이에요 · 실제 결제와 배송은 스마트스토어에서 진행돼요. ※ 상품 구성과 가격은 예시입니다'));
+  giftBody.append(back, d, buy, storeLink(s, 'N 스마트스토어에서 실제 구매하기 ↗'), el('small', 'note', '월드 안 구매는 체험용이에요 · 실제 결제와 배송은 스마트스토어에서 진행돼요. 가격·할인율은 스마트스토어 기준이며 변동될 수 있어요'));
 }
 function renderGiftDone(i) {
   const s = GIFTS[i]; giftBody.textContent = '';
@@ -1268,7 +1475,13 @@ function giveGift(b) {
   logMsg('💝', `${player.name}님이 ${b.name}님에게 '${GIFTS[i].name}'를 선물했어요`, BRAND.gold);
   refreshWho();
 }
-$('#giftBtn').onclick = () => { openGift(null); };
+$('#giftBtn').onclick = () => { document.body.classList.remove('menu-open'); openGift(null); };
+// phone controls: menu, emote tray, chat drawer
+$('#menuBtn').onclick = () => document.body.classList.toggle('menu-open');
+$('#moreTools').addEventListener('click', e => { if (e.target.closest('.tbtn')) document.body.classList.remove('menu-open'); });
+$('#emoToggle').onclick = () => document.body.classList.toggle('emo-open');
+$('#chatToggle').onclick = () => { document.body.classList.add('chat-open'); document.body.classList.remove('emo-open'); setTimeout(() => chatEl.focus(), 30); };
+canvas.addEventListener('pointerdown', () => document.body.classList.remove('menu-open', 'emo-open'));
 
 // customization
 const saved = (() => { try { return JSON.parse(store.get('kimhanwoo.look') || 'null'); } catch(e) { return null; } })();
@@ -1315,10 +1528,11 @@ $('#enter').onclick = finishCustom;
 $('#customBtn').onclick = () => customizing ? finishCustom() : openCustom();
 
 let nightTarget = 0, night = 0;
-$('#nightBtn').onclick = () => { nightTarget = nightTarget ? 0 : 1; $('#nightBtn').textContent = nightTarget ? '☀️' : '🌙'; toast(nightTarget ? '🌙 밤이 되었어요 — 간판에 불이 들어왔어요' : '☀️ 다시 낮이에요'); canvas.focus(); };
+$('#nightBtn').onclick = () => { nightTarget = nightTarget ? 0 : 1; $('#nightBtn').textContent = nightTarget ? '☀️ 낮' : '🌙 밤'; toast(nightTarget ? '🌙 밤이 되었어요 — 간판에 불이 들어왔어요' : '☀️ 다시 낮이에요'); canvas.focus(); };
 
 // chat
 const chatEl = $('#chat');
+if (isTouch) chatEl.placeholder = '메시지 입력…';
 $('#chatbar').addEventListener('submit', e => {
   e.preventDefault();
   const text = cleanChat(chatEl.value.trim());
@@ -1327,8 +1541,9 @@ $('#chatbar').addEventListener('submit', e => {
     if (now - (window.__lastChat || 0) < 1500) { toast('채팅은 천천히 보내주세요 🙏'); return; }
     window.__lastChat = now; say(player, text); botReply(text);
   }
-  chatEl.value = ''; chatEl.blur(); canvas.focus();
+  chatEl.value = ''; chatEl.blur(); canvas.focus(); document.body.classList.remove('chat-open');
 });
+chatEl.addEventListener('blur', () => setTimeout(() => { if (!chatEl.value.trim()) document.body.classList.remove('chat-open'); }, 150));
 chatEl.addEventListener('keydown', e => { e.stopPropagation(); if (e.key === 'Escape') { chatEl.blur(); canvas.focus(); } });
 chatEl.addEventListener('focus', () => { for (const k in keys) keys[k] = false; });
 document.querySelectorAll('[data-e]').forEach(b => b.onclick = () => { if (!customizing) emote(player, b.dataset.e); canvas.focus(); });
@@ -1463,6 +1678,100 @@ function reactNear(t, lines) {
   const sitters = seats.filter(s => s.table === t && s.occupant && s.occupant !== player).map(s => s.occupant);
   const who = sitters.length ? pick(sitters) : (owner && zoneOf(owner.root.position) === zoneOf(player.root.position) ? owner : null);
   if (who && !who.remote) setTimeout(() => { say(who, pick(lines)); emote(who, 'wave'); }, 500);
+}
+
+// ---------- guestbook ----------
+var GB_COLORS = ['#fff1a8', '#ffd9e2', '#d8f2c9', '#d3e8ff', '#ffe2bf'];
+let gbColor = GB_COLORS[0];
+function wrapText(g, text, maxW, maxLines) {
+  const out = []; let line = '';
+  for (const ch of String(text)) { if (g.measureText(line + ch).width > maxW && line) { out.push(line); line = ch; if (out.length === maxLines) return out.map((l, i) => i === maxLines - 1 ? l.slice(0, -1) + '…' : l); } else line += ch; }
+  if (line) out.push(line); return out;
+}
+function drawNote(g, x, y, w, h, row, rot) {
+  g.save(); g.translate(x + w / 2, y + h / 2); g.rotate(rot);
+  g.shadowColor = 'rgba(0,0,0,.25)'; g.shadowBlur = 8; g.shadowOffsetY = 4;
+  g.fillStyle = GB_COLORS.includes(row.color) ? row.color : GB_COLORS[0]; g.fillRect(-w / 2, -h / 2, w, h);
+  g.shadowColor = 'transparent'; g.fillStyle = 'rgba(0,0,0,.06)'; g.fillRect(-w / 2, -h / 2, w, 14);
+  g.fillStyle = '#c0392b'; g.beginPath(); g.arc(0, -h / 2 + 8, 7, 0, 7); g.fill();
+  g.fillStyle = '#3a2a20'; g.textAlign = 'center'; g.textBaseline = 'top'; g.font = `500 ${Math.round(w / 8.6)}px ${NOTO}`;
+  wrapText(g, row.message, w - 22, 3).forEach((l, i) => g.fillText(l, 0, -h / 2 + 24 + i * (w / 7)));
+  g.fillStyle = '#7b6a6f'; g.font = `700 ${Math.round(w / 11)}px ${NOTO}`; g.fillText('- ' + row.name, 0, h / 2 - w / 7.5);
+  g.restore();
+}
+function drawGBBoard() {
+  if (!gbCanvas) return;
+  const g = gbCanvas.getContext('2d'), W = gbCanvas.width, H = gbCanvas.height;
+  g.fillStyle = '#8a6a4a'; g.fillRect(0, 0, W, H);
+  g.fillStyle = 'rgba(0,0,0,.08)'; for (let i = 0; i < 14; i++) g.fillRect(0, i * 40 + 6, W, 2);
+  g.strokeStyle = '#3f2a1c'; g.lineWidth = 16; g.strokeRect(0, 0, W, H);
+  g.fillStyle = WINE_CSS; g.fillRect(290, 14, 444, 58); g.strokeStyle = GOLD_CSS; g.lineWidth = 3; g.strokeRect(296, 20, 432, 46);
+  g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `38px ${HAN}`; g.fillText('응원 방명록', W / 2, 44);
+  const rows = GB.rows.slice(0, 8);
+  if (!rows.length) { g.fillStyle = '#fff8e8'; g.font = `700 34px ${NOTO}`; g.fillText('첫 번째 응원을 남겨주세요! (E)', W / 2, H / 2 + 30); }
+  rows.forEach((r, i) => { const c = i % 4, rr = Math.floor(i / 4); drawNote(g, 40 + c * 245, 96 + rr * 228, 205, 200, r, ((i * 37) % 9 - 4) * .012); });
+  if (gbTex) gbTex.needsUpdate = true;
+}
+// a few of the newest notes float above the board
+function refreshFloatNotes() {
+  for (const n of gbNotes) { n.sprite.parent?.remove(n.sprite); n.sprite.material.map.dispose(); n.sprite.material.dispose(); }
+  gbNotes = [];
+  GB.rows.slice(0, 3).forEach((row, i) => {
+    const t = tex(256, 256, (g) => drawNote(g, 18, 18, 220, 220, row, 0));
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map:t, transparent:true })); sp.scale.set(1.25, 1.25, 1);
+    outdoorG.add(sp); gbNotes.push({ sprite:sp, ph:i * 2.1, x:17.2 + i * 2.3 });
+  });
+}
+function updateFloatNotes(t) {
+  for (const n of gbNotes) { n.sprite.position.set(n.x + Math.sin(t * .6 + n.ph) * .25, 5.4 + Math.sin(t * 1.4 + n.ph) * .22, -2 + Math.cos(t * .5 + n.ph) * .2); n.sprite.material.rotation = Math.sin(t + n.ph) * .12; }
+}
+function renderGBList() {
+  const list = $('#gbList'); list.textContent = '';
+  if (!GB.rows.length) { const d = document.createElement('div'); d.className = 'note'; d.style.cssText = 'font-size:12px;color:#9a898e;padding:6px 2px'; d.textContent = GB.ok ? '아직 응원이 없어요. 첫 번째로 남겨주세요!' : '방명록을 불러오는 중이에요…'; list.appendChild(d); return; }
+  for (const r of GB.rows.slice(0, 30)) { const n = document.createElement('div'); n.className = 'gbnote'; n.style.background = GB_COLORS.includes(r.color) ? r.color : GB_COLORS[0]; n.textContent = r.message; const b = document.createElement('b'); b.textContent = '- ' + r.name; n.appendChild(b); list.appendChild(n); }
+}
+function openGB() {
+  const cs = $('#gbColors'); cs.textContent = '';
+  for (const c of GB_COLORS) { const b = document.createElement('button'); b.type = 'button'; b.className = 'sw' + (c === gbColor ? ' on' : ''); b.style.background = c; b.onclick = () => { gbColor = c; openGB(); }; cs.appendChild(b); }
+  $('#gbReview').href = BRAND.storeUrl;
+  renderGBList(); openModal('gb'); loadGB();
+}
+$('#gbMsg').addEventListener('input', () => { $('#gbCount').textContent = `${$('#gbMsg').value.length}/60`; });
+$('#gbMsg').addEventListener('keydown', e => e.stopPropagation());
+$('#gbPost').onclick = async () => {
+  const raw = $('#gbMsg').value.trim();
+  if (!raw) { toast('응원 메시지를 적어주세요'); return; }
+  if (/https?:|www\.|\.(com|kr|net|io|me)\b|open\.kakao/i.test(raw)) { toast('링크는 남길 수 없어요'); return; }
+  const last = +(store.get('kimhanwoo.gbAt') || 0);
+  if (Date.now() - last < 30000) { toast('방명록은 30초에 한 번 남길 수 있어요'); return; }
+  const row = { name:String(player.name).slice(0, 12) || '손님', message:cleanChat(raw).slice(0, 60), color:gbColor };
+  $('#gbPost').disabled = true;
+  let saved = null;
+  try { if (supa) { const { data, error } = await supa.from('guestbook').insert(row).select('id,name,message,color,created_at').single(); if (!error) saved = data; } } catch (e) {}
+  $('#gbPost').disabled = false;
+  if (!saved) { if (!GB.ok) { toast('지금은 방명록을 저장할 수 없어요 — 잠시 후 다시 시도해 주세요'); return; } saved = { ...row, id:'local-' + Date.now() }; }
+  store.set('kimhanwoo.gbAt', String(Date.now()));
+  $('#gbMsg').value = ''; $('#gbCount').textContent = '0/60';
+  onNewGB(saved, true); closeModals();
+  say(player, `📝 방명록: ${row.message}`);
+};
+function onNewGB(row, mine = false) {
+  if (!row || row.is_hidden || GB.rows.some(r => r.id === row.id)) return;
+  GB.rows.unshift({ id:row.id, name:cleanName(row.name), message:cleanChat(String(row.message || '')).slice(0, 60), color:row.color });
+  GB.rows = GB.rows.slice(0, 50);
+  drawGBBoard(); refreshFloatNotes(); if ($('#gb').style.display === 'flex') renderGBList();
+  if (zoneOf(player.root.position) === 'out') spawnFx(new THREE.Vector3(19.5, 4.6, -2), '📝', 3);
+  if (!mine) logMsg('📝', `${cleanName(row.name)}님이 방명록에 응원을 남겼어요`, BRAND.gold);
+}
+async function loadGB() {
+  if (!supa) return;
+  try {
+    const { data, error } = await supa.from('guestbook').select('id,name,message,color,created_at').order('created_at', { ascending:false }).limit(50);
+    if (!error && Array.isArray(data)) { GB.rows = data.map(r => ({ id:r.id, name:cleanName(r.name), message:cleanChat(String(r.message || '')).slice(0, 60), color:r.color })); GB.ok = true; drawGBBoard(); refreshFloatNotes(); if ($('#gb').style.display === 'flex') renderGBList(); }
+  } catch (e) {}
+}
+function subscribeGB() {
+  try { supa.channel('guestbook-feed').on('postgres_changes', { event:'INSERT', schema:'public', table:'guestbook' }, ({ new:row }) => onNewGB(row)).subscribe(); } catch (e) {}
 }
 
 // ---------- leaderboard ----------
@@ -1933,13 +2242,16 @@ function frame() {
   hemi.intensity = 1.1 - .75 * night;
   sun.intensity = 2.3 * (1 - night) + .3 * night; sun.color.lerpColors(SUN_DAY, SUN_NIGHT, night);
   lampMat.emissiveIntensity = .1 + night * 2.5; for (const L of lampLights) L.intensity = night * 30;
+  latticeMat.emissiveIntensity = .04 + night * 1.1; lanternRed.emissiveIntensity = .15 + night * 2.2; lanternBlue.emissiveIntensity = .1 + night * 1.8;
+  for (const m of hyunpanMats) m.emissiveIntensity = .05 + night * .5;
+  for (let i = 0; i < banners.length; i++) banners[i].rotation.y = Math.sin(t * 1.3 + i) * .12;
   windowMat.emissiveIntensity = .15 + night * 1.6; signM.emissiveIntensity = .1 + night * .9; giftSignM.emissiveIntensity = .1 + night * .7;
   starMat.opacity = night; stars.position.set(p.x, 0, p.z);
   for (const c of clouds) { c.position.x += c.userData.v * dt; if (c.position.x > 150) c.position.x = -150; }
 
   renderer.render(scene, camera);
   if (recState && recState.rec) composeFrame();
-  updateFx(dt); updateGrill(dt);
+  updateFx(dt); updateGrill(dt); if (zone === 'out') updateFloatNotes(t);
 
   for (const a of avatars) {
     if (!a.root.visible) { hideEl(a.label); hideEl(a.bubble); continue; }
@@ -2101,7 +2413,7 @@ async function connectSupabase() {
   }
   if (!mod) { toast('실시간 연결을 불러오지 못했어요 — 혼자 모드로 둘러보세요'); return; }
   supa = mod.createClient(SUPABASE.url, SUPABASE.key, { auth:{ persistSession:false }, realtime:{ params:{ eventsPerSecond:20 } } });
-  loadLB();
+  loadLB(); loadGB(); subscribeGB();
   const ch = supa.channel(SUPABASE.channel, { config:{ broadcast:{ self:false }, presence:{ key:myPeer } } });
   ch.on('broadcast', { event:'p' }, ({ payload }) => onRemote(payload))
     .on('presence', { event:'sync' }, () => { liveCount = Object.keys(ch.presenceState()).length; renderLive(); })
