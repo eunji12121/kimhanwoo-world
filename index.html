@@ -330,6 +330,7 @@ const BRAND = {
   worldName: '김씨네한우 월드',
   tagline: '1++ 한우 전문 · 산지직송',
   storeUrl: 'https://smartstore.naver.com/kimhanwoo',
+  giftUrl: 'https://smartstore.naver.com/kimhanwoo/products/4967430429',   // 선물세트 7종 판매 페이지
   wine: 0x7b1e34,
   cream: 0xf8f1e7,
   gold: 0xc9a45c,
@@ -1426,7 +1427,7 @@ for (const m of BRAND.menu) {
 const giftBody = $('#giftBody');
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 function gboxEl(s, big) { const g = el('div', 'gbox' + (big ? ' big' : '')); g.style.setProperty('--c', hex(s.box)); g.style.setProperty('--r', hex(s.ribbon)); return g; }
-function storeLink(s, text) { const a = el('a', 'btn naver', text); a.href = s?.url || BRAND.storeUrl; a.target = '_blank'; a.rel = 'noopener'; return a; }
+function storeLink(s, text) { const a = el('a', 'btn naver', text); a.href = (s && s.url) || BRAND.giftUrl || BRAND.storeUrl; a.target = '_blank'; a.rel = 'noopener'; return a; }
 function renderGiftList() {
   giftBody.textContent = '';
   giftBody.append(el('h3', '', '선물세트'), el('div', 'sub', `${BRAND.name} 선물세트관 · 원하는 세트를 눌러보세요`));
@@ -1436,7 +1437,7 @@ function renderGiftList() {
     const pr = el('div', 'pr'); if (s.original) pr.append(el('div', 'orig', s.original)); const now = el('div'); if (s.discount) now.append(el('span', 'disc', s.discount)); now.append(document.createTextNode(s.price)); pr.append(now);
     r.append(gboxEl(s), t, pr); giftBody.appendChild(r);
   });
-  giftBody.append(storeLink(null, 'N 스마트스토어에서 전체 상품 보기 ↗'), el('small', 'note', '※ 가격·할인율은 스마트스토어 기준이며 변동될 수 있어요'));
+  giftBody.append(storeLink(null, 'N 스마트스토어에서 선물세트 구매하기 ↗'), el('small', 'note', '※ 가격·할인율은 스마트스토어 기준이며 변동될 수 있어요'));
 }
 function renderGiftDetail(i) {
   const s = GIFTS[i]; giftBody.textContent = '';
